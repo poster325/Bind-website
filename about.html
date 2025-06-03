@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Bind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-accent: #f1f5f9;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background-color: var(--bg-accent);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background-color: var(--bg-accent);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        /* Background Section */
+        .background-section {
+            background: var(--bg-secondary);
+        }
+
+        .background-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .background-text h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .background-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .background-image {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            border-radius: 1rem;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .mission-card, .vision-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mission-card h3, .vision-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-card p, .vision-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .card-icon {
+            width: 4rem;
+            height: 4rem;
+            background: var(--accent-color);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Design Philosophy Section */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .philosophy-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .philosophy-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: var(--accent-color);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .philosophy-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: var(--bg-secondary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-avatar {
+            width: 5rem;
+            height: 5rem;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .team-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: var(--bg-primary);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .value-number {
+            width: 3rem;
+            height: 3rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .value-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .value-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .background-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .mission-vision {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Bind</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="about.html" class="nav-link active">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">About Bind</h1>
+            <p class="page-subtitle">Revolutionizing the publishing industry through AI-powered collaboration and innovative design philosophy</p>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section class="section background-section">
+        <div class="container">
+            <h2 class="section-title">Our Background</h2>
+            <p class="section-subtitle">The story behind Bind and our mission to transform publishing</p>
+            
+            <div class="background-content">
+                <div class="background-text">
+                    <h3>The Publishing Revolution</h3>
+                    <p>
+                        Bind was born from a simple observation: the traditional publishing industry was failing to keep pace with the digital age. Authors faced countless barriers—from finding the right publisher to navigating complex editorial processes that often took years to complete.
+                    </p>
+                    <p>
+                        Our founders, a team of publishing veterans and AI researchers, recognized that artificial intelligence could bridge this gap. By combining human creativity with AI efficiency, we could create a platform that democratizes publishing while maintaining the highest quality standards.
+                    </p>
+                    <p>
+                        Since our launch in 2023, we've helped over 1,000 authors bring their stories to life, from first-time writers to established professionals looking for a more streamlined publishing experience.
+                    </p>
+                </div>
+                <div class="background-image">
+                    📚
+                </div>
+            </div>
+
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        To democratize publishing by providing authors with AI-powered tools and collaborative binders that make high-quality book creation accessible, efficient, and affordable for everyone.
+                    </p>
+                </div>
+                <div class="vision-card">
+                    <div class="card-icon">🔮</div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        A world where every story has the opportunity to be told beautifully, where technology enhances human creativity rather than replacing it, and where publishing is limited only by imagination.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Philosophy Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Design Philosophy</h2>
+            <p class="section-subtitle">The principles that guide our approach to AI-powered publishing</p>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🤝</div>
+                    <h3>Human-AI Collaboration</h3>
+                    <p>We believe AI should augment human creativity, not replace it. Our binders work alongside authors to enhance their vision while preserving their unique voice and style.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">⚡</div>
+                    <h3>Efficiency Without Compromise</h3>
+                    <p>Speed shouldn't come at the cost of quality. Our streamlined processes reduce time-to-market while maintaining rigorous editorial and design standards.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🎨</div>
+                    <h3>Personalized Excellence</h3>
+                    <p>Every book is unique, and our approach reflects that. We tailor our AI binders and processes to match each author's specific needs, genre, and goals.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🌍</div>
+                    <h3>Accessible Publishing</h3>
+                    <p>Great stories shouldn't be limited by geography, connections, or traditional gatekeepers. We make professional publishing accessible to authors worldwide.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🔄</div>
+                    <h3>Iterative Improvement</h3>
+                    <p>We embrace continuous learning and refinement. Our AI binders evolve with each project, becoming more sophisticated and effective over time.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">🛡️</div>
+                    <h3>Ethical AI</h3>
+                    <p>We're committed to responsible AI development, ensuring transparency, fairness, and respect for intellectual property in all our processes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">The passionate individuals behind Bind's innovation</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">AS</div>
+                    <h3>Alex Sterling</h3>
+                    <div class="team-role">CEO & Co-Founder</div>
+                    <p>Former publishing executive with 15 years of experience at major publishing houses. Passionate about democratizing the publishing process through technology.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">MC</div>
+                    <h3>Maya Chen</h3>
+                    <div class="team-role">CTO & Co-Founder</div>
+                    <p>AI researcher and former Google engineer specializing in natural language processing and machine learning applications in creative industries.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">DR</div>
+                    <h3>David Rodriguez</h3>
+                    <div class="team-role">Head of AI Development</div>
+                    <p>PhD in Computer Science with expertise in AI ethics and human-computer interaction. Leads our AI binder development and training programs.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">SJ</div>
+                    <h3>Sarah Johnson</h3>
+                    <div class="team-role">Editorial Director</div>
+                    <p>Award-winning editor with 20 years in traditional publishing. Ensures our AI binders maintain the highest editorial standards across all genres.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">RP</div>
+                    <h3>Raj Patel</h3>
+                    <div class="team-role">Head of Design</div>
+                    <p>Creative director with expertise in book design and user experience. Leads our platform design and visual identity initiatives.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">LW</div>
+                    <h3>Lisa Wang</h3>
+                    <div class="team-role">Head of Author Success</div>
+                    <p>Former literary agent dedicated to author advocacy and success. Ensures every author has the support they need throughout their publishing journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section values-section">
+        <div class="container">
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="section-subtitle">The principles that drive everything we do</p>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-number">1</div>
+                    <h3>Innovation</h3>
+                    <p>We continuously push the boundaries of what's possible in publishing, embracing new technologies and methodologies to serve our authors better.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">2</div>
+                    <h3>Quality</h3>
+                    <p>Excellence is non-negotiable. Every book that goes through our platform meets the highest standards of content, design, and production quality.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">3</div>
+                    <h3>Transparency</h3>
+                    <p>We believe in open communication and clear processes. Authors always know what's happening with their projects and why.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">4</div>
+                    <h3>Empowerment</h3>
+                    <p>We give authors the tools, knowledge, and support they need to succeed in their publishing journey and beyond.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">5</div>
+                    <h3>Community</h3>
+                    <p>Publishing is collaborative. We foster a supportive community where authors, binders, and our team work together toward shared success.</p>
+                </div>
+
+                <div class="value-item">
+                    <div class="value-number">6</div>
+                    <h3>Integrity</h3>
+                    <p>We operate with honesty, respect, and ethical standards in all our relationships and business practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -3,510 +3,624 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bind - Main Project</title>
+    <title>Bind - Revolutionizing Book Publishing with AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-accent: #f1f5f9;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 60px 0;
-            min-height: 100vh;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        
-        .subsection {
-            margin: 40px 0;
-        }
-        
-        .subsection h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        nav {
+
+        /* Navigation */
+        .navbar {
             position: fixed;
             top: 0;
-            width: 100%;
+            left: 0;
+            right: 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 0;
         }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        nav li {
-            margin: 0 15px;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #007bff;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem 2rem;
         }
-        
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background-color: var(--bg-accent);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background-color: var(--bg-accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-sm {
+            padding: 4rem 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .hero h1 {
             font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 1rem;
         }
-        
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .key-image-placeholder {
-            width: 300px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem auto;
-        }
-        
-        .video-placeholder {
-            width: 100%;
-            max-width: 800px;
-            height: 450px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem auto;
-            color: #666;
-        }
-        
-        .steps-grid {
+
+        /* Cards */
+        .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 2rem 0;
+            margin-top: 3rem;
         }
-        
-        .step-card {
-            background: #f8f9fa;
+
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
             padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
-        
-        .impact-grid {
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+
+        .card-icon {
+            width: 3rem;
+            height: 3rem;
+            background: var(--accent-color);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Two Column Layout */
+        .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin: 2rem 0;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
         }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+
+        .content-block h3 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
         }
-        
-        .portfolio-item {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
+
+        .content-block p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1.5rem;
         }
-        
-        .blog-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
         }
-        
-        .blog-card-content {
-            padding: 1.5rem;
-        }
-        
-        .faq-item {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-        
-        footer {
-            background: #333;
+
+        .feature-list li::before {
+            content: '✓';
+            background: var(--accent-color);
             color: white;
-            text-align: center;
-            padding: 2rem 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
         }
-        
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: var(--bg-accent);
+            border: 2px dashed var(--border-color);
+            border-radius: 1rem;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        /* Steps Section */
+        .steps-container {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
-            
-            .impact-grid {
+
+            .hero .subtitle {
+                font-size: 1.125rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .card-grid {
                 grid-template-columns: 1fr;
             }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#intro">Intro</a></li>
-            <li><a href="#background">Background</a></li>
-            <li><a href="#binder-user">Binder & User</a></li>
-            <li><a href="#steps">Steps</a></li>
-            <li><a href="#design">Design</a></li>
-            <li><a href="#impact">Impact</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#blog">Blog</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Bind</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="faq.html" class="nav-link">FAQ</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Key Visual Section -->
-    <section id="hero" class="hero">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <h1>Bind</h1>
-            <p class="subtitle">Main Project Title - Sub & Headline</p>
-            <div class="key-image-placeholder">
-                <p>Key Image Placeholder</p>
+            <div class="hero-content">
+                <h1>Bind</h1>
+                <p class="subtitle">Revolutionizing book publishing through AI-powered collaboration between authors and intelligent binders</p>
+                <a href="#intro" class="cta-button">
+                    Discover How It Works
+                    <span>→</span>
+                </a>
             </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>↓</span>
         </div>
     </section>
 
-    <!-- Intro Section -->
-    <section id="intro">
+    <!-- Introduction Section -->
+    <section id="intro" class="section">
         <div class="container">
-            <h2 class="section-title">Introduction</h2>
-            
-            <div class="subsection">
-                <h3>What is Bind</h3>
-                <p>Content about what Bind is and its core purpose...</p>
+            <div class="section-header">
+                <h2 class="section-title">What is Bind?</h2>
+                <p class="section-subtitle">Bind transforms the traditional publishing process by connecting authors with AI-powered binders who help craft, refine, and publish exceptional books.</p>
             </div>
-            
-            <div class="subsection">
-                <h3>Target & Position</h3>
-                <p>Information about target audience and market position...</p>
-            </div>
-            
-            <div class="video-placeholder">
-                <p>Intro Video Placeholder</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Background Section -->
-    <section id="background">
-        <div class="container">
-            <h2 class="section-title">Background</h2>
-            
-            <div class="subsection">
-                <h3>Why We Made Bind</h3>
-                <p>The story behind creating Bind and the problems it solves...</p>
+            <div class="two-column">
+                <div class="content-block">
+                    <h3>Intelligent Publishing Platform</h3>
+                    <p>Bind leverages cutting-edge AI technology to match authors with specialized binders who understand their vision, genre, and target audience.</p>
+                    <ul class="feature-list">
+                        <li>AI-powered author-binder matching</li>
+                        <li>Collaborative writing environment</li>
+                        <li>Real-time feedback and suggestions</li>
+                        <li>Streamlined publishing workflow</li>
+                    </ul>
+                </div>
+                <div class="image-placeholder">
+                    Platform Interface Preview
+                </div>
             </div>
-            
-            <div class="subsection">
-                <h3>Book Publishing in AI Era</h3>
-                <p>How AI is transforming the book publishing industry...</p>
-            </div>
-            
-            <div class="video-placeholder">
-                <p>Background Video Placeholder</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>For Authors</h3>
+                    <p>Transform your ideas into published works with expert guidance and AI-enhanced collaboration tools.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤖</div>
+                    <h3>AI-Powered Binders</h3>
+                    <p>Intelligent assistants that understand publishing trends, market demands, and reader preferences.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Targeted Publishing</h3>
+                    <p>Reach the right audience with data-driven insights and strategic publishing approaches.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Binder & User Section -->
-    <section id="binder-user">
+    <section class="section" style="background-color: var(--bg-secondary);">
         <div class="container">
-            <h2 class="section-title">Binder & User</h2>
-            
-            <div class="subsection">
-                <h3>Who Can Use</h3>
-                <p>Target users and use cases for Bind...</p>
+            <div class="section-header">
+                <h2 class="section-title">Who Can Use Bind?</h2>
+                <p class="section-subtitle">Bind serves a diverse community of creators, from first-time authors to established publishers.</p>
             </div>
-            
-            <div class="subsection">
-                <h3>What is Binder</h3>
-                <p>Explanation of the Binder concept and functionality...</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">✍️</div>
+                    <h3>Aspiring Authors</h3>
+                    <p>First-time writers looking for guidance and support to bring their stories to life with professional quality.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📖</div>
+                    <h3>Experienced Writers</h3>
+                    <p>Established authors seeking to streamline their publishing process and explore new creative possibilities.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Publishing Houses</h3>
+                    <p>Publishers looking to enhance their editorial process with AI-powered tools and collaborative workflows.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Academic Writers</h3>
+                    <p>Researchers and academics who need assistance in transforming complex ideas into accessible publications.</p>
+                </div>
+            </div>
+
+            <div class="two-column" style="margin-top: 4rem;">
+                <div class="image-placeholder">
+                    Binder Interface Demo
+                </div>
+                <div class="content-block">
+                    <h3>What is a Binder?</h3>
+                    <p>A Binder is an AI-powered publishing assistant that combines the expertise of traditional editors with the efficiency of modern technology.</p>
+                    <ul class="feature-list">
+                        <li>Specialized in specific genres and markets</li>
+                        <li>Provides real-time writing assistance</li>
+                        <li>Offers market insights and trends</li>
+                        <li>Manages the entire publishing pipeline</li>
+                        <li>Ensures quality and consistency</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Steps Section -->
-    <section id="steps">
+    <section class="section">
         <div class="container">
-            <h2 class="section-title">Steps</h2>
-            
-            <div class="steps-grid">
-                <div class="step-card">
-                    <h3>Choose Binder</h3>
-                    <p>How users select their preferred binder...</p>
+            <div class="section-header">
+                <h2 class="section-title">How Bind Works</h2>
+                <p class="section-subtitle">A simple, streamlined process that takes you from concept to published book.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose Your Binder</h4>
+                        <p>Browse our curated selection of AI binders, each specialized in different genres, styles, and publishing approaches. Find the perfect match for your project based on your goals and preferences.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <h3>1st Interaction</h3>
-                    <p>Initial interaction process...</p>
+
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Initial Collaboration</h4>
+                        <p>Share your ideas, outline, and vision with your chosen binder. Receive personalized feedback, market insights, and a customized publishing strategy tailored to your project.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <h3>2nd Interaction</h3>
-                    <p>Second phase of interaction...</p>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Iterative Development</h4>
+                        <p>Work collaboratively with your binder through multiple rounds of refinement. Receive real-time suggestions, structural improvements, and content enhancements.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <h3>3rd Interaction</h3>
-                    <p>Final interaction phase...</p>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Final Polish</h4>
+                        <p>Complete the final editing phase with comprehensive proofreading, formatting, and preparation for publication across multiple platforms and formats.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <h3>Book Receive</h3>
-                    <p>How users receive their completed book...</p>
+
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Receive Your Book</h4>
+                        <p>Get your professionally published book in digital and print formats, complete with marketing materials and distribution strategy recommendations.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <h3>System Flow</h3>
-                    <p>Overall system workflow diagram...</p>
+            </div>
+
+            <div class="two-column" style="margin-top: 4rem;">
+                <div class="content-block">
+                    <h3>System Workflow</h3>
+                    <p>Our intelligent system manages the entire publishing pipeline, ensuring quality, efficiency, and seamless collaboration between authors and binders.</p>
+                    <ul class="feature-list">
+                        <li>Automated project tracking</li>
+                        <li>Version control and backup</li>
+                        <li>Progress monitoring and milestones</li>
+                        <li>Quality assurance checkpoints</li>
+                    </ul>
+                </div>
+                <div class="image-placeholder">
+                    System Flow Diagram
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Design Philosophy Section -->
-    <section id="design">
-        <div class="container">
-            <h2 class="section-title">Design Philosophy</h2>
-            
-            <div class="subsection">
-                <h3>3 Messages</h3>
-                <div class="steps-grid">
-                    <div class="step-card">
-                        <h4>Message 1</h4>
-                        <p>First core design principle...</p>
-                    </div>
-                    <div class="step-card">
-                        <h4>Message 2</h4>
-                        <p>Second core design principle...</p>
-                    </div>
-                    <div class="step-card">
-                        <h4>Message 3</h4>
-                        <p>Third core design principle...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Section -->
-    <section id="impact">
-        <div class="container">
-            <h2 class="section-title">Impact</h2>
-            
-            <div class="impact-grid">
-                <div class="subsection">
-                    <h3>Narrow Impact</h3>
-                    <p>Direct impact on immediate users and stakeholders...</p>
-                </div>
-                
-                <div class="subsection">
-                    <h3>Wide Impact</h3>
-                    <p>Broader societal and industry impact...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="container">
-            <h2 class="section-title">Portfolio</h2>
-            
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <h3>Book Mockup</h3>
-                    <div class="key-image-placeholder">
-                        <p>Book Mockup Images</p>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item">
-                    <h3>Blog (User Cases)</h3>
-                    <p>Collection of user case studies and success stories...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq">
-        <div class="container">
-            <h2 class="section-title">FAQ</h2>
-            
-            <div class="faq-item">
-                <h4>Frequently Asked Question 1</h4>
-                <p>Answer to the first common question...</p>
-            </div>
-            
-            <div class="faq-item">
-                <h4>Frequently Asked Question 2</h4>
-                <p>Answer to the second common question...</p>
-            </div>
-            
-            <div class="faq-item">
-                <h4>Frequently Asked Question 3</h4>
-                <p>Answer to the third common question...</p>
-            </div>
-            
-            <div class="subsection">
-                <h3>Other Details</h3>
-                <p>Additional information and details about Bind...</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Gallery Section -->
-    <section id="blog">
-        <div class="container">
-            <h2 class="section-title">Blog Gallery</h2>
-            <p style="text-align: center; margin-bottom: 3rem;">User Case Articles</p>
-            
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div class="blog-card-content">
-                        <h3>User Case Study 1</h3>
-                        <p>Description of the first user case study...</p>
-                        <a href="#" style="color: #007bff;">Read More</a>
-                    </div>
-                </article>
-                
-                <article class="blog-card">
-                    <div class="blog-card-content">
-                        <h3>User Case Study 2</h3>
-                        <p>Description of the second user case study...</p>
-                        <a href="#" style="color: #007bff;">Read More</a>
-                    </div>
-                </article>
-                
-                <article class="blog-card">
-                    <div class="blog-card-content">
-                        <h3>User Case Study 3</h3>
-                        <p>Description of the third user case study...</p>
-                        <a href="#" style="color: #007bff;">Read More</a>
-                    </div>
-                </article>
-                
-                <article class="blog-card">
-                    <div class="blog-card-content">
-                        <h3>User Case Study 4</h3>
-                        <p>Description of the fourth user case study...</p>
-                        <a href="#" style="color: #007bff;">Read More</a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Credits Section -->
-    <footer id="credits">
-        <div class="container">
-            <h2>Credits</h2>
-            <p>Project team, contributors, and acknowledgments...</p>
-            <p>&copy; 2024 Bind Project. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
         // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Add active class to navigation based on scroll position
+        // Navbar scroll effect
         window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('nav a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
         });
     </script>
 </body>
