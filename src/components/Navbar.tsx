@@ -7,7 +7,7 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: white;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
@@ -24,30 +24,39 @@ const NavContainer = styled.div`
 `;
 
 const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--primary-color);
-  text-decoration: none;
+  gap: 0.5rem;
+
+  img {
+    height: 2.5rem;
+    width: auto;
+  }
 `;
 
 const NavMenu = styled.ul`
   display: flex;
   list-style: none;
   gap: 2rem;
+  margin: 0;
+  padding: 0;
 `;
 
-const NavLink = styled(Link)<{ $isActive: boolean }>`
+const NavLink = styled(Link)<{ $active: boolean }>`
   text-decoration: none;
-  color: var(--text-primary);
+  color: ${(props) =>
+    props.$active ? "var(--primary-color)" : "var(--text-primary)"};
   font-weight: 500;
   font-size: 0.95rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   transition: all 0.3s ease;
   background-color: ${(props) =>
-    props.$isActive ? "var(--bg-accent)" : "transparent"};
-  color: ${(props) =>
-    props.$isActive ? "var(--primary-color)" : "var(--text-primary)"};
+    props.$active ? "var(--bg-accent)" : "transparent"};
 
   &:hover {
     color: var(--primary-color);
@@ -61,33 +70,36 @@ const Navbar: React.FC = () => {
   return (
     <Nav>
       <NavContainer>
-        <Logo to="/">Bind</Logo>
+        <Logo to="/">
+          <img src="/logo.svg" alt="Bind Logo" />
+          Bind
+        </Logo>
         <NavMenu>
           <li>
-            <NavLink to="/" $isActive={location.pathname === "/"}>
+            <NavLink to="/" $active={location.pathname === "/"}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" $isActive={location.pathname === "/about"}>
+            <NavLink to="/about" $active={location.pathname === "/about"}>
               About
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/portfolio"
-              $isActive={location.pathname === "/portfolio"}
+              $active={location.pathname === "/portfolio"}
             >
               Portfolio
             </NavLink>
           </li>
           <li>
-            <NavLink to="/blog" $isActive={location.pathname === "/blog"}>
+            <NavLink to="/blog" $active={location.pathname === "/blog"}>
               Blog
             </NavLink>
           </li>
           <li>
-            <NavLink to="/faq" $isActive={location.pathname === "/faq"}>
+            <NavLink to="/faq" $active={location.pathname === "/faq"}>
               FAQ
             </NavLink>
           </li>

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Portfolio from "./pages/Portfolio";
 import Blog from "./pages/Blog";
+import BlogPostLoader from "./components/BlogPostLoader";
 import FAQ from "./pages/FAQ";
 
 const GlobalStyle = createGlobalStyle`
@@ -42,6 +43,8 @@ const GlobalStyle = createGlobalStyle`
 
 const AppContainer = styled.div`
   min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 `;
 
 function App() {
@@ -55,6 +58,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:postId" element={<BlogPostLoader />} />
           <Route path="/faq" element={<FAQ />} />
         </Routes>
       </AppContainer>

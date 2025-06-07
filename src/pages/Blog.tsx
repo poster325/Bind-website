@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import matter from "gray-matter";
 
 const PageHeader = styled.div`
   background: linear-gradient(
@@ -42,12 +44,13 @@ const BlogGrid = styled.div`
   margin-top: 3rem;
 `;
 
-const BlogCard = styled.article`
+const BlogCard = styled(Link)`
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: 1rem;
   overflow: hidden;
   transition: all 0.3s ease;
+  text-decoration: none;
 
   &:hover {
     transform: translateY(-4px);
@@ -67,6 +70,13 @@ const BlogImage = styled.div`
   justify-content: center;
   color: white;
   font-size: 3rem;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const BlogContent = styled.div`
@@ -95,53 +105,134 @@ const BlogMeta = styled.div`
   font-size: 0.875rem;
 `;
 
+const CategoryFilter = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+`;
+
+const CategoryButton = styled.button<{ $active: boolean }>`
+  background: ${(props) =>
+    props.$active ? "var(--primary-color)" : "var(--bg-primary)"};
+  color: ${(props) => (props.$active ? "white" : "var(--text-primary)")};
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${(props) =>
+      props.$active ? "var(--secondary-color)" : "var(--bg-accent)"};
+  }
+`;
+
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  image?: string;
+  category: string;
+}
+
 const Blog: React.FC = () => {
-  const posts = [
-    {
-      title: "The Future of AI in Publishing",
-      excerpt:
-        "Exploring how artificial intelligence is transforming the publishing industry",
-      date: "March 15, 2024",
-      author: "Jane Smith",
-      icon: "🤖",
-    },
-    {
-      title: "Writing with AI: A Guide",
-      excerpt: "Learn how to effectively use AI tools in your writing process",
-      date: "March 10, 2024",
-      author: "John Doe",
-      icon: "✍️",
-    },
-    {
-      title: "AI-Generated Content Ethics",
-      excerpt:
-        "Understanding the ethical considerations of AI-generated content",
-      date: "March 5, 2024",
-      author: "Sarah Johnson",
-      icon: "⚖️",
-    },
-    {
-      title: "The Rise of AI Authors",
-      excerpt: "How AI is changing the landscape of authorship and creativity",
-      date: "February 28, 2024",
-      author: "Mike Wilson",
-      icon: "📚",
-    },
-    {
-      title: "AI in Children's Books",
-      excerpt: "The impact of AI on children's literature and education",
-      date: "February 20, 2024",
-      author: "Emily Brown",
-      icon: "👶",
-    },
-    {
-      title: "Publishing in the AI Era",
-      excerpt: "Adapting traditional publishing practices for the AI age",
-      date: "February 15, 2024",
-      author: "David Lee",
-      icon: "📖",
-    },
-  ];
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All Stories");
+  const [categories, setCategories] = useState<string[]>(["All Stories"]);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch the manifest file
+        const response = await fetch("/blog/articles/manifest.json");
+        if (!response.ok) {
+          throw new Error("Failed to load blog posts");
+        }
+
+        const manifest = await response.json();
+        const postFiles = manifest.files || [];
+
+        // Load and parse each post
+        const loadedPosts = await Promise.all(
+          postFiles.map(async (filename: string) => {
+            const postResponse = await fetch(`/blog/articles/${filename}`);
+            const markdown = await postResponse.text();
+            const { data } = matter(markdown);
+
+            return {
+              id: filename.replace(".md", ""),
+              title: data.title || "Untitled Post",
+              excerpt: data.excerpt || markdown.slice(0, 200) + "...",
+              date: data.date || new Date().toISOString().split("T")[0],
+              author: data.author || {
+                name: "Anonymous",
+                role: "Writer",
+                avatar: "A",
+              },
+              image: data.image,
+              category: data.category || "Uncategorized",
+            };
+          })
+        );
+
+        // Sort posts by date (newest first)
+        loadedPosts.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
+        // Extract unique categories
+        const uniqueCategories = new Set(["All Stories"]);
+        loadedPosts.forEach((post) => uniqueCategories.add(post.category));
+        setCategories(Array.from(uniqueCategories));
+
+        setPosts(loadedPosts);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "Failed to load blog posts"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPosts();
+  }, []);
+
+  const filteredPosts =
+    selectedCategory === "All Stories"
+      ? posts
+      : posts.filter((post) => post.category === selectedCategory);
+
+  if (loading) {
+    return (
+      <PageHeader>
+        <PageTitle>Loading...</PageTitle>
+      </PageHeader>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageHeader>
+        <PageTitle>Error</PageTitle>
+        <PageSubtitle>{error}</PageSubtitle>
+      </PageHeader>
+    );
+  }
 
   return (
     <>
@@ -154,17 +245,35 @@ const Blog: React.FC = () => {
 
       <Section>
         <Container>
+          <CategoryFilter>
+            {categories.map((category) => (
+              <CategoryButton
+                key={category}
+                $active={category === selectedCategory}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </CategoryButton>
+            ))}
+          </CategoryFilter>
+
           <BlogGrid>
-            {posts.map((post, index) => (
-              <BlogCard key={index}>
-                <BlogImage>{post.icon}</BlogImage>
+            {filteredPosts.map((post) => (
+              <BlogCard key={post.id} to={`/blog/${post.id}`}>
+                <BlogImage>
+                  {post.image ? (
+                    <img src={post.image} alt={post.title} />
+                  ) : (
+                    post.author.avatar
+                  )}
+                </BlogImage>
                 <BlogContent>
                   <h3>{post.title}</h3>
                   <p>{post.excerpt}</p>
                   <BlogMeta>
-                    <span>{post.date}</span>
+                    <span>{new Date(post.date).toLocaleDateString()}</span>
                     <span>•</span>
-                    <span>{post.author}</span>
+                    <span>{post.author.name}</span>
                   </BlogMeta>
                 </BlogContent>
               </BlogCard>
