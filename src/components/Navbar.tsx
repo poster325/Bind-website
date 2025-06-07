@@ -1,15 +1,13 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-const Nav = styled.nav`
+const Nav = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: white;
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-color);
   z-index: 1000;
   padding: 0;
 `;
@@ -20,89 +18,127 @@ const NavContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 20px 2rem;
 `;
 
-const Logo = styled(Link)`
+const Logo = styled.div`
+  width: fit-content;
+  height: fit-content;
   display: flex;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
-  font-size: 1.75rem;
-  font-weight: 700;
-  gap: 0.5rem;
+  font-size: 30px;
+  gap: 0.3rem;
+  color: var(--text-primary);
+  cursor: pointer;
 
   img {
-    height: 2.5rem;
+    height: 2.3rem;
     width: auto;
   }
 `;
 
-const NavMenu = styled.ul`
+const NavMenu = styled.div`
   display: flex;
-  list-style: none;
-  gap: 2rem;
+  gap: 2.5rem;
   margin: 0;
   padding: 0;
 `;
 
-const NavLink = styled(Link)<{ $active: boolean }>`
-  text-decoration: none;
-  color: ${(props) =>
-    props.$active ? "var(--primary-color)" : "var(--text-primary)"};
+const NavItem = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NavLink = styled.div<{ $active: boolean }>`
+  text-decoration: ${(props) => (props.$active ? "underline" : "none")};
+  text-decoration-style: ${(props) => (props.$active ? "dotted" : "none")};
+  text-decoration-thickness: ${(props) => (props.$active ? "2px" : "none")};
+  text-underline-offset: 0.25em;
+  color: var(--text-primary);
   font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  font-size: 1.05rem;
+  padding: 0.5rem 0;
   transition: all 0.3s ease;
-  background-color: ${(props) =>
-    props.$active ? "var(--bg-accent)" : "transparent"};
+  cursor: pointer;
 
   &:hover {
-    color: var(--primary-color);
-    background-color: var(--bg-accent);
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 0.25em;
+    color: var(--text-primary);
+  }
+`;
+
+const GetStartedButton = styled.div`
+  background: black;
+  color: white;
+  padding: 0.85rem 1.8rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
   }
 `;
 
 const Navbar: React.FC = () => {
   const location = useLocation();
 
+  const handleNavigation = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
     <Nav>
       <NavContainer>
-        <Logo to="/" className="ginto">
+        <Logo className="ginto" onClick={() => handleNavigation("/")}>
           <img src="/logo.svg" alt="Bind Logo" />
           Bind
         </Logo>
         <NavMenu>
-          <li>
-            <NavLink to="/" $active={location.pathname === "/"}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/about" $active={location.pathname === "/about"}>
+          <NavItem>
+            <NavLink
+              $active={location.pathname === "/about"}
+              onClick={() => handleNavigation("/about")}
+            >
               About
             </NavLink>
-          </li>
-          <li>
+          </NavItem>
+          <NavItem>
             <NavLink
-              to="/portfolio"
               $active={location.pathname === "/portfolio"}
+              onClick={() => handleNavigation("/portfolio")}
             >
               Portfolio
             </NavLink>
-          </li>
-          <li>
-            <NavLink to="/blog" $active={location.pathname === "/blog"}>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              $active={location.pathname === "/blog"}
+              onClick={() => handleNavigation("/blog")}
+            >
               Blog
             </NavLink>
-          </li>
-          <li>
-            <NavLink to="/faq" $active={location.pathname === "/faq"}>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              $active={location.pathname === "/faq"}
+              onClick={() => handleNavigation("/faq")}
+            >
               FAQ
             </NavLink>
-          </li>
+          </NavItem>
         </NavMenu>
+        <GetStartedButton onClick={() => handleNavigation("#")}>
+          Get Started
+        </GetStartedButton>
       </NavContainer>
     </Nav>
   );

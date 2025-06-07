@@ -11,9 +11,9 @@
 }
 
 :root {
-  --primary-color: #2563eb;
-  --secondary-color: #1d4ed8;
-  --accent-color: #3b82f6;
+  --primary-color: #121212;
+  --secondary-color: #f1e1ff;
+  --accent-color: #f1e1ff;
   --bg-primary: #ffffff;
   --bg-accent: #f3f4f6;
   --text-primary: #1f2937;
@@ -39,9 +39,9 @@ body {
 
 .ginto {
   font-family: "Ginto", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-style: normal;
-  font-variation-settings: "wght" 600;
+  font-variation-settings: "wght" 500;
 }
 
 * {
