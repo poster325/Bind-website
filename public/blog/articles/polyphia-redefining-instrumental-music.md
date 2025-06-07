@@ -15,10 +15,6 @@ tags:
     "instrumental",
     "genre-fusion",
     "technical-mastery",
-    "modern-composition",
-    "visual-branding",
-    "post-genre",
-    "guitar-innovation",
   ]
 ---
 
