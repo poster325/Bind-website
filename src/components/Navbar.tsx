@@ -29,7 +29,6 @@ const Logo = styled(Link)`
   text-decoration: none;
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--primary-color);
   gap: 0.5rem;
 
   img {
@@ -70,7 +69,7 @@ const Navbar: React.FC = () => {
   return (
     <Nav>
       <NavContainer>
-        <Logo to="/">
+        <Logo to="/" className="ginto">
           <img src="/logo.svg" alt="Bind Logo" />
           Bind
         </Logo>

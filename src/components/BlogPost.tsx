@@ -7,7 +7,7 @@ import styled from "styled-components";
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 6rem 2rem 2rem;
 `;
 
 const BackLink = styled(Link)`

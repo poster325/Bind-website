@@ -71,8 +71,39 @@ const CTAButton = styled(Link)`
   }
 `;
 
-const Section = styled.section`
+const ScrollIndicator = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  opacity: 0.7;
+  animation: bounce 2s infinite;
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+`;
+
+interface SectionProps {
+  $bgColor?: string;
+}
+
+const Section = styled.section<SectionProps>`
   padding: 6rem 0;
+  background-color: ${(props) => props.$bgColor || "transparent"};
 `;
 
 const Container = styled.div`
@@ -100,11 +131,84 @@ const SectionSubtitle = styled.p`
   margin: 0 auto;
 `;
 
+const TwoColumn = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+`;
+
+const ContentBlock = styled.div`
+  h3 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+`;
+
+const FeatureList = styled.ul`
+  list-style: none;
+  margin-top: 1.5rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+
+    &::before {
+      content: "✓";
+      background: var(--accent-color);
+      color: white;
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+  }
+`;
+
+const ImagePlaceholder = styled.div`
+  background: var(--bg-accent);
+  border: 2px dashed var(--border-color);
+  border-radius: 1rem;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 1.125rem;
+  font-weight: 500;
+`;
+
 const CardGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Card = styled.div`
@@ -147,57 +251,266 @@ const CardText = styled.p`
   line-height: 1.6;
 `;
 
+const StepsContainer = styled.div`
+  position: relative;
+  margin-top: 3rem;
+`;
+
+const StepItem = styled.div`
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: flex-start;
+`;
+
+const StepNumber = styled.div`
+  background: var(--primary-color);
+  color: white;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  flex-shrink: 0;
+`;
+
+const StepContent = styled.div`
+  h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+`;
+
 const Home: React.FC = () => {
   return (
     <>
       <Hero>
-        <HeroContent>
-          <Title>Revolutionizing Book Publishing with AI</Title>
-          <Subtitle>
-            Transform your writing process with our cutting-edge AI technology.
-            Create, edit, and publish your books faster than ever before.
-          </Subtitle>
-          <CTAButton to="/about">Get Started</CTAButton>
-        </HeroContent>
+        <Container>
+          <HeroContent>
+            <Title>Bind</Title>
+            <Subtitle>
+              Revolutionizing Book Publishing with collective memory, emotional
+              storytelling, and AI-assisted narrative curation
+            </Subtitle>
+            <CTAButton to="#intro">
+              Discover How It Works
+              <span>→</span>
+            </CTAButton>
+          </HeroContent>
+        </Container>
+        <ScrollIndicator>
+          <span>↓</span>
+        </ScrollIndicator>
       </Hero>
 
-      <Section>
+      <Section id="intro">
         <Container>
           <SectionHeader>
-            <SectionTitle>Why Choose Bind?</SectionTitle>
+            <SectionTitle>What is Bind?</SectionTitle>
             <SectionSubtitle>
-              Our platform combines the power of AI with human creativity to
-              revolutionize the publishing industry.
+              Bind transforms the traditional publishing process by shifting
+              focus from single-author narratives to shared memory storytelling.
+            </SectionSubtitle>
+          </SectionHeader>
+
+          <TwoColumn>
+            <ContentBlock>
+              <h3>Remembering Together</h3>
+              <p>
+                Through conversational data, photos, and emotional fragments,
+                Bind helps groups reflect on a year of their collaborative
+                memories.
+              </p>
+              <FeatureList>
+                <li>
+                  explanation explanation explanation explanation explanation
+                </li>
+                <li>
+                  explanation explanation explanation explanation explanation
+                </li>
+                <li>
+                  explanation explanation explanation explanation explanation
+                </li>
+                <li>
+                  explanation explanation explanation explanation explanation
+                </li>
+              </FeatureList>
+            </ContentBlock>
+            <ImagePlaceholder>Platform Interface Preview</ImagePlaceholder>
+          </TwoColumn>
+
+          <CardGrid>
+            <Card>
+              <CardIcon>📚</CardIcon>
+              <CardTitle>Multi-perspective Collection</CardTitle>
+              <CardText>
+                Bind supports guided memory collection from multiple
+                participants through structured interviews designed by the
+                binder.
+              </CardText>
+            </Card>
+            <Card>
+              <CardIcon>🤖</CardIcon>
+              <CardTitle>Organizing Narrative with AI</CardTitle>
+              <CardText>
+                An AI system helps organize, group, and structure raw memory
+                fragments with a consistent tone.
+              </CardText>
+            </Card>
+            <Card>
+              <CardIcon>🎯</CardIcon>
+              <CardTitle>Design Tailored for Memory</CardTitle>
+              <CardText>
+                Through design choices in tone and visuals, each book is
+                tailored to the emotional truth of its contributors.
+              </CardText>
+            </Card>
+          </CardGrid>
+        </Container>
+      </Section>
+
+      <Section $bgColor="var(--bg-secondary)">
+        <Container>
+          <SectionHeader>
+            <SectionTitle>Who Can Use Bind?</SectionTitle>
+            <SectionSubtitle>
+              explanation explanation explanation explanation explanation
+              explanation explanation
             </SectionSubtitle>
           </SectionHeader>
 
           <CardGrid>
             <Card>
-              <CardIcon>🚀</CardIcon>
-              <CardTitle>AI-Powered Writing</CardTitle>
-              <CardText>
-                Leverage advanced AI to enhance your writing process and
-                generate creative content.
-              </CardText>
+              <CardIcon>✍️</CardIcon>
+              <CardTitle>User Example</CardTitle>
+              <CardText>explanation explanation explanation</CardText>
             </Card>
-
             <Card>
-              <CardIcon>📚</CardIcon>
-              <CardTitle>Smart Publishing</CardTitle>
-              <CardText>
-                Streamline your publishing workflow with our intelligent tools
-                and automation.
-              </CardText>
+              <CardIcon>📖</CardIcon>
+              <CardTitle>User Example</CardTitle>
+              <CardText>explanation explanation explanation</CardText>
             </Card>
-
             <Card>
-              <CardIcon>🎯</CardIcon>
-              <CardTitle>Market Insights</CardTitle>
-              <CardText>
-                Get valuable insights into market trends and reader preferences.
-              </CardText>
+              <CardIcon>🏢</CardIcon>
+              <CardTitle>User Example</CardTitle>
+              <CardText>explanation explanation explanation</CardText>
+            </Card>
+            <Card>
+              <CardIcon>🎓</CardIcon>
+              <CardTitle>User Example</CardTitle>
+              <CardText>explanation explanation explanation</CardText>
             </Card>
           </CardGrid>
+
+          <TwoColumn style={{ marginTop: "4rem" }}>
+            <ImagePlaceholder>Diagram</ImagePlaceholder>
+            <ContentBlock>
+              <h3>What is a Binder?</h3>
+              <p>
+                explanation explanation explanation explanation explanation
+                explanation explanation
+              </p>
+              <FeatureList>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+              </FeatureList>
+            </ContentBlock>
+          </TwoColumn>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionHeader>
+            <SectionTitle>How Bind Works</SectionTitle>
+            <SectionSubtitle>
+              explanation explanation explanation
+            </SectionSubtitle>
+          </SectionHeader>
+
+          <StepsContainer>
+            <StepItem>
+              <StepNumber>1</StepNumber>
+              <StepContent>
+                <h4>Choose Your Binder</h4>
+                <p>
+                  explanation explanation explanation explanation explanation
+                  explanation explanation
+                </p>
+              </StepContent>
+            </StepItem>
+
+            <StepItem>
+              <StepNumber>2</StepNumber>
+              <StepContent>
+                <h4>1st Interaction</h4>
+                <p>
+                  explanation explanation explanation explanation explanation
+                  explanation explanation
+                </p>
+              </StepContent>
+            </StepItem>
+
+            <StepItem>
+              <StepNumber>3</StepNumber>
+              <StepContent>
+                <h4>2nd Interaction</h4>
+                <p>
+                  explanation explanation explanation explanation explanation
+                  explanation explanation
+                </p>
+              </StepContent>
+            </StepItem>
+
+            <StepItem>
+              <StepNumber>4</StepNumber>
+              <StepContent>
+                <h4>3rd Interaction</h4>
+                <p>
+                  explanation explanation explanation explanation explanation
+                  explanation explanation
+                </p>
+              </StepContent>
+            </StepItem>
+
+            <StepItem>
+              <StepNumber>5</StepNumber>
+              <StepContent>
+                <h4>Receive Your Book</h4>
+                <p>
+                  explanation explanation explanation explanation explanation
+                  explanation explanation
+                </p>
+              </StepContent>
+            </StepItem>
+          </StepsContainer>
+
+          <TwoColumn style={{ marginTop: "4rem" }}>
+            <ContentBlock>
+              <h3>System Workflow</h3>
+              <p>explanation explanation explanation</p>
+              <FeatureList>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+                <li>explanation explanation explanation</li>
+              </FeatureList>
+            </ContentBlock>
+            <ImagePlaceholder>System Flow Diagram</ImagePlaceholder>
+          </TwoColumn>
         </Container>
       </Section>
     </>

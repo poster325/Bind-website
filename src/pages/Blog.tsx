@@ -37,11 +37,28 @@ const Container = styled.div`
   padding: 0 2rem;
 `;
 
+const SectionTitle = styled.h2`
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const SectionSubtitle = styled.p`
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  text-align: center;
+`;
+
 const BlogGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
+  margin-bottom: 4rem;
 `;
 
 const BlogCard = styled(Link)`
@@ -51,25 +68,25 @@ const BlogCard = styled(Link)`
   overflow: hidden;
   transition: all 0.3s ease;
   text-decoration: none;
+  box-shadow: var(--shadow-sm);
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--accent-color);
   }
 `;
 
 const BlogImage = styled.div`
   height: 200px;
-  background: linear-gradient(
-    135deg,
-    var(--accent-color) 0%,
-    var(--primary-color) 100%
-  );
+  background: var(--bg-accent);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 3rem;
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 500;
   overflow: hidden;
 
   img {
@@ -86,14 +103,15 @@ const BlogContent = styled.div`
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
   }
 
   p {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -103,6 +121,36 @@ const BlogMeta = styled.div`
   gap: 1rem;
   color: var(--text-light);
   font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+`;
+
+const BlogDate = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+`;
+
+const BlogCategory = styled.span`
+  background: var(--accent-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+`;
+
+const ReadMoreLink = styled.span`
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--secondary-color);
+  }
 `;
 
 const CategoryFilter = styled.div`
@@ -114,19 +162,121 @@ const CategoryFilter = styled.div`
 `;
 
 const CategoryButton = styled.button<{ $active: boolean }>`
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 2rem;
   background: ${(props) =>
     props.$active ? "var(--primary-color)" : "var(--bg-primary)"};
-  color: ${(props) => (props.$active ? "white" : "var(--text-primary)")};
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  color: ${(props) => (props.$active ? "white" : "var(--text-secondary)")};
+  text-decoration: none;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
     background: ${(props) =>
-      props.$active ? "var(--secondary-color)" : "var(--bg-accent)"};
+      props.$active ? "var(--primary-color)" : "var(--bg-accent)"};
+    color: ${(props) => (props.$active ? "white" : "var(--primary-color)")};
+    border-color: ${(props) =>
+      props.$active ? "var(--primary-color)" : "var(--border-color)"};
+  }
+`;
+
+const FeaturedArticleSection = styled.section`
+  background: var(--bg-secondary);
+  padding: 4rem 0;
+`;
+
+const FeaturedContent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+`;
+
+const FeaturedText = styled.div`
+  h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+`;
+
+const FeaturedImage = styled.div`
+  height: 300px;
+  background: var(--bg-accent);
+  border: 2px dashed var(--border-color);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 1.125rem;
+  font-weight: 500;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const AuthorInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-primary);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+`;
+
+const AuthorAvatar = styled.div`
+  width: 3rem;
+  height: 3rem;
+  background: var(--accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const AuthorDetails = styled.div`
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
   }
 `;
 
@@ -142,10 +292,12 @@ interface BlogPost {
   };
   image?: string;
   category: string;
+  content: string;
 }
 
 const Blog: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [featuredPost, setFeaturedPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All Stories");
@@ -171,12 +323,12 @@ const Blog: React.FC = () => {
           postFiles.map(async (filename: string) => {
             const postResponse = await fetch(`/blog/articles/${filename}`);
             const markdown = await postResponse.text();
-            const { data } = matter(markdown);
+            const { data, content } = matter(markdown);
 
             return {
               id: filename.replace(".md", ""),
               title: data.title || "Untitled Post",
-              excerpt: data.excerpt || markdown.slice(0, 200) + "...",
+              excerpt: data.excerpt || content.slice(0, 200) + "...",
               date: data.date || new Date().toISOString().split("T")[0],
               author: data.author || {
                 name: "Anonymous",
@@ -185,6 +337,7 @@ const Blog: React.FC = () => {
               },
               image: data.image,
               category: data.category || "Uncategorized",
+              content: content,
             };
           })
         );
@@ -193,6 +346,11 @@ const Blog: React.FC = () => {
         loadedPosts.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
+
+        // Set the first post as featured (or handle a specific featured post logic if needed)
+        if (loadedPosts.length > 0) {
+          setFeaturedPost(loadedPosts[0]);
+        }
 
         // Extract unique categories
         const uniqueCategories = new Set(["All Stories"]);
@@ -243,8 +401,61 @@ const Blog: React.FC = () => {
         </PageSubtitle>
       </PageHeader>
 
+      {featuredPost && (
+        <FeaturedArticleSection>
+          <Container>
+            <SectionTitle>Featured Story</SectionTitle>
+            <FeaturedContent>
+              <FeaturedText>
+                <h3>
+                  <Link to={`/blog/${featuredPost.id}`}>
+                    {featuredPost.title}
+                  </Link>
+                </h3>
+                <p>{featuredPost.excerpt}</p>
+                <BlogMeta>
+                  <BlogDate>
+                    {new Date(featuredPost.date).toLocaleDateString()}
+                  </BlogDate>
+                  <BlogCategory>{featuredPost.category}</BlogCategory>
+                </BlogMeta>
+                <AuthorInfo>
+                  <AuthorAvatar>
+                    {featuredPost.author.avatar ? (
+                      <img
+                        src={featuredPost.author.avatar}
+                        alt={featuredPost.author.name}
+                      />
+                    ) : (
+                      featuredPost.author.name.charAt(0)
+                    )}
+                  </AuthorAvatar>
+                  <AuthorDetails>
+                    <h4>{featuredPost.author.name}</h4>
+                    <p>{featuredPost.author.role}</p>
+                  </AuthorDetails>
+                </AuthorInfo>
+              </FeaturedText>
+              <FeaturedImage>
+                {featuredPost.image ? (
+                  <img src={featuredPost.image} alt={featuredPost.title} />
+                ) : (
+                  "Featured Article Image"
+                )}
+              </FeaturedImage>
+            </FeaturedContent>
+          </Container>
+        </FeaturedArticleSection>
+      )}
+
       <Section>
         <Container>
+          <SectionTitle>User Case Studies</SectionTitle>
+          <SectionSubtitle>
+            Real stories from binders & users who have transformed their
+            publishing journey with Bind
+          </SectionSubtitle>
+
           <CategoryFilter>
             {categories.map((category) => (
               <CategoryButton
@@ -264,17 +475,26 @@ const Blog: React.FC = () => {
                   {post.image ? (
                     <img src={post.image} alt={post.title} />
                   ) : (
-                    post.author.avatar
+                    "Case Study Image"
                   )}
                 </BlogImage>
                 <BlogContent>
+                  <BlogMeta>
+                    <BlogDate>
+                      <span role="img" aria-label="calendar">
+                        🗓️
+                      </span>
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </BlogDate>
+                    <BlogCategory>{post.category}</BlogCategory>
+                  </BlogMeta>
                   <h3>{post.title}</h3>
                   <p>{post.excerpt}</p>
-                  <BlogMeta>
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
-                    <span>•</span>
-                    <span>{post.author.name}</span>
-                  </BlogMeta>
+                  <ReadMoreLink>Read More →</ReadMoreLink>
                 </BlogContent>
               </BlogCard>
             ))}
