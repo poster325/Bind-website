@@ -333,16 +333,16 @@ const Home: React.FC = () => {
               </p>
               <FeatureList>
                 <li>
-                  explanation explanation explanation explanation explanation
+                  Shared memories become the foundation, not a single author’s voice
                 </li>
                 <li>
-                  explanation explanation explanation explanation explanation
+                  Each book is a one-year time capsule, co-written by those who lived through it
                 </li>
                 <li>
-                  explanation explanation explanation explanation explanation
+                  AI helps structure stories, but the tone stays deeply personal
                 </li>
                 <li>
-                  explanation explanation explanation explanation explanation
+                  You receive a beautifully composed, emotionally rich book that feels truly yours
                 </li>
               </FeatureList>
             </ContentBlock>
