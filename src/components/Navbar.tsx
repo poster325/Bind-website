@@ -68,6 +68,7 @@ const NavLink = styled.div<{ $active: boolean }>`
     text-decoration-style: solid;
     text-underline-offset: 0.25em;
     color: var(--text-primary);
+    transform: translateY(-1.5px);
   }
 `;
 
@@ -84,7 +85,7 @@ const GetStartedButton = styled.div`
 
   &:hover {
     opacity: 0.9;
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
   }
 `;
 
@@ -136,7 +137,9 @@ const Navbar: React.FC = () => {
             </NavLink>
           </NavItem>
         </NavMenu>
-        <GetStartedButton onClick={() => handleNavigation("#")}>
+        <GetStartedButton
+          onClick={() => window.open("https://forms.gle/MyhyAsj2FopCkuMUA")}
+        >
           Get Started
         </GetStartedButton>
       </NavContainer>
