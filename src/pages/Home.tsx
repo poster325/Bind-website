@@ -384,31 +384,30 @@ const Home: React.FC = () => {
           <SectionHeader>
             <SectionTitle>Who Can Use Bind?</SectionTitle>
             <SectionSubtitle>
-              explanation explanation explanation explanation explanation
-              explanation explanation
+              Bind is for those who want to reflect, remember, and reimagine their experiences together.
             </SectionSubtitle>
           </SectionHeader>
 
           <CardGrid>
             <Card>
-              <CardIcon>✍️</CardIcon>
-              <CardTitle>User Example</CardTitle>
-              <CardText>explanation explanation explanation</CardText>
+              <CardIcon>👨‍👩‍👧‍👦</CardIcon>
+              <CardTitle>Families</CardTitle>
+              <CardText>Parents, siblings, and children recalling a year of everyday life</CardText>
             </Card>
             <Card>
-              <CardIcon>📖</CardIcon>
-              <CardTitle>User Example</CardTitle>
-              <CardText>explanation explanation explanation</CardText>
-            </Card>
-            <Card>
-              <CardIcon>🏢</CardIcon>
-              <CardTitle>User Example</CardTitle>
-              <CardText>explanation explanation explanation</CardText>
+              <CardIcon>🎉</CardIcon>
+              <CardTitle>Friend Groups</CardTitle>
+              <CardText>Turning everyday photos and jokes into a meaningful record</CardText>
             </Card>
             <Card>
               <CardIcon>🎓</CardIcon>
-              <CardTitle>User Example</CardTitle>
-              <CardText>explanation explanation explanation</CardText>
+              <CardTitle>School Colleagues</CardTitle>
+              <CardText>Commemorating a shared journey of school life or graduation</CardText>
+            </Card>
+            <Card>
+              <CardIcon>🎸</CardIcon>
+              <CardTitle>Student Clubs</CardTitle>
+              <CardText>Bandmates or project teams preserving behind-the-scenes emotions</CardText>
             </Card>
           </CardGrid>
 
