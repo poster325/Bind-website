@@ -267,25 +267,6 @@ const Portfolio: React.FC = () => {
               </PortfolioItem>
             ))}
           </PortfolioGrid>
-
-          <StatsGrid>
-            <StatItem>
-              <StatNumber>500+</StatNumber>
-              <StatLabel>Books Published</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatNumber>95%</StatNumber>
-              <StatLabel>User Satisfaction</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatNumber>5+</StatNumber>
-              <StatLabel>Awards Won</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatNumber>300+</StatNumber>
-              <StatLabel>Binders</StatLabel>
-            </StatItem>
-          </StatsGrid>
         </Container>
       </Section>
     </>
